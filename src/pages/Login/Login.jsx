@@ -3,12 +3,12 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from "react-simple-captcha";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { connectAuthEmulator } from "firebase/auth";
+// import { connectAuthEmulator } from "firebase/auth";
 
 
 const Login = () => {
 
-    const captchaRef = useRef(null); 
+    // const captchaRef = useRef(null); 
     const [disabled, setDisabled] = useState(true);
 
     const {signIn} = useContext(AuthContext)
@@ -35,8 +35,8 @@ const Login = () => {
         })
     }
 
-    const handleValidateCaptcha = () => {
-        const user_validate_value = captchaRef.current.value; 
+    const handleValidateCaptcha = (e) => {
+        const user_validate_value = e.target.value; 
         if(validateCaptcha(user_validate_value)==true){
             setDisabled(false)
         }
@@ -70,8 +70,8 @@ const Login = () => {
                             <label className="label">
                                 <LoadCanvasTemplate/>
                             </label>
-                            <input ref={captchaRef} type="text" name="captcha" placeholder="Write the captcha code" className="input input-bordered" required />
-                            <button onClick={handleValidateCaptcha} className="btn btn-outline btn-xs mt-4">Validate</button>
+                            <input  onBlur={handleValidateCaptcha} type="text" name="captcha" placeholder="Write the captcha code" className="input input-bordered" required />
+                            {/* <button className="btn btn-outline btn-xs mt-4">Validate</button> */}
                         </div>
                         <div className="form-control mt-6">
                             <input disabled={disabled} className="btn btn-primary" type="submit" value="Login" />
