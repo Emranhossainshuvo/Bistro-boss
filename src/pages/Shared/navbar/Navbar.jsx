@@ -20,6 +20,7 @@ const Navbar = () => {
         <li><Link to="/menu">Our Menu</Link></li>
         <li><Link to="/order/salad">Order food</Link></li>
         {user ? <button onClick={handleLogOut}>Log out</button> : <li><Link to="/login">Login</Link></li>}
+        <li><Link to="/secret">Secret</Link></li>
 
     </>
 

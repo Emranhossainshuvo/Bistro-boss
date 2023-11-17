@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { ColorRing } from 'react-loader-spinner'
 import { AuthContext } from "../Provider/AuthProvider";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 const PrivateRoute = ({ children }) => {
+
+    const location = useLocation(); 
 
     const { user, loading } = useContext(AuthContext);
 
@@ -23,7 +25,7 @@ const PrivateRoute = ({ children }) => {
         return children;
     }
 
-    return <Navigate to="/login"></Navigate>
+    return <Navigate to="/login" state={{from : location}} replace></Navigate>
 };
 
 export default PrivateRoute;
