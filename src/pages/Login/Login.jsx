@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from "react-simple-captcha";
 
@@ -64,6 +65,9 @@ const Login = () => {
                         <div className="form-control mt-6">
                             <input disabled={disabled} className="btn btn-primary" type="submit" value="Login" />
                         </div>
+                        <Helmet>
+                            <title>Bistro Boss | Login</title>
+                        </Helmet>
                     </form>
                     <p><small>New here? <Link to='/register'>Register</Link> now!</small></p>
                 </div>

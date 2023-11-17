@@ -1,4 +1,7 @@
+import { useContext } from "react";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 
 
@@ -6,7 +9,18 @@ import { useForm } from "react-hook-form";
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors }, } = useForm();
 
-    const onSubmit = (data) => console.log(data);
+    const { createUser } = useContext(AuthContext)
+
+    const onSubmit = (data) => {
+
+        createUser(data.email, data.password)
+        .then(data => {
+            const user = data.user; 
+            console.log(user)
+        })
+
+        console.log(data)
+    };
 
     // console.log(watch("example"))
 
@@ -30,21 +44,24 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" {...register("email", { required: true })} name="email" placeholder="email" className="input input-bordered"  />
+                            <input type="email" {...register("email", { required: true })} name="email" placeholder="email" className="input input-bordered" />
                             {errors.email && <span>This field is required</span>}
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" {...register("password", { required: true, minLength: 20 })} name="password" placeholder="password" className="input input-bordered"/>
+                            <input type="password" {...register("password", { required: true, maxLength: 20 })} name="password" placeholder="password" className="input input-bordered" />
                             {errors.password && <span>This field is required</span>}
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
+                            <Helmet>
+                                <title>Bistro Boss | Sign up</title>
+                            </Helmet>
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary">Sign up</button>
+                            <input className="btn btn-primary" type="submit" value="Sign up" />
                         </div>
                     </form>
                 </div>
