@@ -1,7 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from "react-simple-captcha";
+import { AuthContext } from "../../Provider/AuthProvider";
+import { connectAuthEmulator } from "firebase/auth";
 
 
 const Login = () => {
@@ -9,6 +11,7 @@ const Login = () => {
     const captchaRef = useRef(null); 
     const [disabled, setDisabled] = useState(true);
 
+    const {signIn} = useContext(AuthContext)
 
     useEffect( () => {
         loadCaptchaEnginge(6);
@@ -22,6 +25,14 @@ const Login = () => {
         const password = form.password.value; 
         // const person = {email, password}
         // console.log(email, password)
+        signIn(email, password )
+        .then(result => {
+            const user = result.user; 
+            console.log(user)
+        })
+        .catch(error => {
+            console.error(error)
+        })
     }
 
     const handleValidateCaptcha = () => {
