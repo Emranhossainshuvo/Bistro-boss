@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import { HiMiniShoppingCart } from "react-icons/hi2";
 
 
 const Navbar = () => {
@@ -9,17 +10,36 @@ const Navbar = () => {
 
     const handleLogOut = () => {
         logOut()
-        .then(() => {})
-        .catch(err => {
-            console.log(err)
-        })
+            .then(() => { })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     const navOptions = <>
 
         <li><Link to="/menu">Our Menu</Link></li>
         <li><Link to="/order/salad">Order food</Link></li>
-        {user ? <> <span>{user?.displayName}</span> <button onClick={handleLogOut}>Log out</button></> : <li><Link to="/login">Login</Link></li>}
+        <li>
+            <Link to="/">
+                <button className="btn">
+                    <HiMiniShoppingCart />
+                    <div className="badge badge-secondary">+0</div>
+                </button>
+            </Link>
+        </li>
+        {
+            user ?
+                <>
+                    {/* <span>{user?.displayName}</span> */}
+                    <button onClick={handleLogOut}>Log out</button>
+                </>
+                :
+                <>
+                    <li><Link to="/login">Login</Link></li>
+                </>
+        }
+
         <li><Link to="/secret">Secret</Link></li>
 
     </>
