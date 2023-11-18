@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 
 
@@ -9,6 +10,8 @@ const FoodCard = ({ item }) => {
     const navigate = useNavigate(); 
 
     const location = useLocation(); 
+
+    const axiosSecure = useAxiosSecure(); 
 
     const { image, price, recipe, name, _id } = item || {};
 
@@ -23,6 +26,11 @@ const FoodCard = ({ item }) => {
                 image, 
                 price
             }
+            axiosSecure.post('/carts', cartItem)
+            .then(res => {
+                console.log(res.data)
+                // TODO: sweetAlert
+            })
         }
         else {
             Swal.fire({
