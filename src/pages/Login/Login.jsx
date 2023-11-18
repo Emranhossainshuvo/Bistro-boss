@@ -76,11 +76,11 @@ const Login = () => {
                             <label className="label">
                                 <LoadCanvasTemplate/>
                             </label>
-                            <input  onBlur={handleValidateCaptcha} type="text" name="captcha" placeholder="Write the captcha code" className="input input-bordered" required />
+                            <input  onBlur={handleValidateCaptcha} type="text" name="captcha" placeholder="Write the captcha code" className="input input-bordered"  />
                             {/* <button className="btn btn-outline btn-xs mt-4">Validate</button> */}
                         </div>
                         <div className="form-control mt-6">
-                            <input disabled={disabled} className="btn btn-primary" type="submit" value="Login" />
+                            <input disabled={false} className="btn btn-primary" type="submit" value="Login" />
                         </div>
                         <Helmet>
                             <title>Bistro Boss | Login</title>
