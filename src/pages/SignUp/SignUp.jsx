@@ -8,22 +8,22 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 const SignUp = () => {
-    const { register, handleSubmit, reset, formState: { errors }, } = useForm();
+    const { register, handleSubmit, formState: { errors }, } = useForm();
 
     const { createUser, updateUserProfile } = useContext(AuthContext);
 
     const navigate = useNavigate();
 
     const onSubmit = (data) => {
-
+        console.log(data)
         createUser(data.email, data.password)
-        .then(data => {
-            const user = data.user; 
+        .then(result => {
+            const user = result.user; 
             console.log(user)
             updateUserProfile(data.name, data.photoURL)
             .then(() => {
                 console.log('user profile infor updated');
-                reset();
+                // reset();
                 navigate('/')
             })
             .catch(error => {
