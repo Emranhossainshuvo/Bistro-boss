@@ -1,63 +1,111 @@
 import { NavLink, Outlet } from "react-router-dom";
-import {  MdCalendarToday, MdHome, MdList, MdMenu, MdReviews, MdShoppingCart, MdWallet } from "react-icons/md";
+import { MdApartment, MdBookOnline, MdCalendarToday, MdCall, MdHome, MdList, MdMenu, MdPeople, MdReviews, MdShoppingCart, MdWallet } from "react-icons/md";
+import { ImBook, ImBookmarks, ImBooks, ImList, ImSpoonKnife } from "react-icons/im";
 import useCart from "../hooks/useCart";
 
 
 const Dashboard = () => {
 
-    const [cart] = useCart(); 
+    const [cart] = useCart();
+
+    const isAdmin = true;
 
     return (
         <div className="flex">
             <div className="w-64 min-h-screen bg-orange-400">
                 <ul className="menu">
-                    <li>
-                        <NavLink to="/dashboard/userHome">
-                            <MdHome />
-                            User Home
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/reservation">
-                            <MdCalendarToday />
-                            Reservation
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/paymentHistory">
-                            <MdWallet />
-                            payment history
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/cart">
-                            <MdShoppingCart />
-                            My cart ({cart.length})
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/addReview">
-                            <MdReviews />
-                            Add review
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/myBooking">
-                            <MdList />
-                            My Booking
-                        </NavLink>
-                    </li>
+                    {
+                        isAdmin ?
+                            <>
+                                <li>
+                                    <NavLink to="/dashboard/adminHome">
+                                        <MdApartment></MdApartment>
+                                        Admin Home
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/addItems">
+                                        <ImSpoonKnife />
+                                        Add items
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/manageItems">
+                                        <ImList/>
+                                        Manage Items
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/Bookings">
+                                        <ImBook/>
+                                        Manage Bookings
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/users">
+                                        <MdPeople />
+                                        All users
+                                    </NavLink>
+                                </li>
+                            </>
+                            :
+                            <>
+                                <li>
+                                    <NavLink to="/dashboard/userHome">
+                                        <MdHome />
+                                        User Home
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/reservation">
+                                        <MdCalendarToday />
+                                        Reservation
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/paymentHistory">
+                                        <MdWallet />
+                                        payment history
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/cart">
+                                        <MdShoppingCart />
+                                        My cart ({cart.length})
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/addReview">
+                                        <MdReviews />
+                                        Add review
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/myBooking">
+                                        <MdList />
+                                        My Booking
+                                    </NavLink>
+                                </li>
+                            </>
+                    }
+                    {/* common items */}
                     <div className="divider"></div>
                     <li>
                         <NavLink to="/">
                             <MdHome />
-                             Home
+                            Home
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/order/salad">
                             <MdMenu />
-                             Menu
+                            Menu
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/order/contact">
+                            <MdCall />
+                            Contact
                         </NavLink>
                     </li>
                 </ul>
