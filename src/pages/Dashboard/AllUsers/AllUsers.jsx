@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { FaPeopleArrows, FaPeopleGroup, FaTrash, FaUser, FaUsers } from "react-icons/fa6";
+import { FaTrash, FaUsers } from "react-icons/fa6";
 import Swal from "sweetalert2";
 
 
 const AllUsers = () => {
 
     const axiosSecure = useAxiosSecure();
-    const { data: users = [] , refetch} = useQuery({
+    const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosSecure.get('/users');
@@ -44,7 +44,29 @@ const AllUsers = () => {
     }
 
     const handleMakeAdmin = user => {
-        
+        axiosSecure.patch(`/users/admin/${user._id}`)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.modifiedCount) {
+                    Swal.fire({
+                        title: `${user.name} is an admin now!`,
+                        showClass: {
+                            popup: `
+                        animate__animated
+                        animate__fadeInUp
+                        animate__faster
+                      `
+                        },
+                        hideClass: {
+                            popup: `
+                        animate__animated
+                        animate__fadeOutDown
+                        animate__faster
+                      `
+                        }
+                    });
+                }
+            })
     }
 
     return (
@@ -72,9 +94,11 @@ const AllUsers = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>
-                                    <button onClick={() => handleMakeAdmin(user)} className="btn bg-orange-500 text-white text-2xl btn-outline">
-                                        <FaUsers />
-                                    </button>
+                                    {
+                                        <button onClick={() => handleMakeAdmin(user)} className="btn bg-orange-500 text-white text-2xl btn-outline">
+                                            <FaUsers />
+                                        </button>
+                                    }
                                 </td>
                                 <td>
                                     <button onClick={() => handleDeleteUser(user)} className="btn btn-outline">
