@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 
 
@@ -14,6 +15,8 @@ const SignUp = () => {
     const { register, handleSubmit, formState: { errors }, } = useForm();
     const { createUser, updateUserProfile } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    
 
     const onSubmit = (data) => {
         console.log(data)
@@ -92,6 +95,9 @@ const SignUp = () => {
                         </div>
                         <div className="form-control mt-6">
                             <input className="btn btn-primary" type="submit" value="Sign up" />
+                        </div>
+                        <div className="form-control mt-6">
+                            <SocialLogin></SocialLogin>
                         </div>
                     </form>
                     <p>Already have an account? <Link to='/login'>Login</Link></p>

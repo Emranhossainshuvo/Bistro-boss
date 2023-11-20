@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from "react-simple-captcha";
 import { AuthContext } from "../../Provider/AuthProvider";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 // import { connectAuthEmulator } from "firebase/auth";
 
 
@@ -11,39 +12,39 @@ const Login = () => {
     // const captchaRef = useRef(null); 
     const [disabled, setDisabled] = useState(true);
 
-    const {signIn} = useContext(AuthContext)
+    const { signIn } = useContext(AuthContext)
 
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const location = useLocation();
 
     const from = location.state?.from?.pathname || "/";
 
-    useEffect( () => {
+    useEffect(() => {
         loadCaptchaEnginge(6);
     }, [])
 
     const handleLogin = event => {
         event.preventDefault();
         // console.log('form submitted')
-        const form = event.target; 
-        const email = form.email.value; 
-        const password = form.password.value; 
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
         // const person = {email, password}
         // console.log(email, password)
-        signIn(email, password )
-        .then(result => {
-            const user = result.user; 
-            console.log(user)
-            navigate(from, {replace: true})
-        })
-        .catch(error => {
-            console.error(error)
-        })
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                console.error(error)
+            })
     }
 
     const handleValidateCaptcha = (e) => {
-        const user_validate_value = e.target.value; 
-        if(validateCaptcha(user_validate_value)==true){
+        const user_validate_value = e.target.value;
+        if (validateCaptcha(user_validate_value) == true) {
             setDisabled(false)
         }
     }
@@ -74,13 +75,17 @@ const Login = () => {
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <LoadCanvasTemplate/>
+                                <LoadCanvasTemplate />
                             </label>
-                            <input  onBlur={handleValidateCaptcha} type="text" name="captcha" placeholder="Write the captcha code" className="input input-bordered"  />
+                            <input onBlur={handleValidateCaptcha} type="text" name="captcha" placeholder="Write the captcha code" className="input input-bordered" />
                             {/* <button className="btn btn-outline btn-xs mt-4">Validate</button> */}
                         </div>
                         <div className="form-control mt-6">
                             <input disabled={false} className="btn btn-primary" type="submit" value="Login" />
+                        </div>
+                        <div className="form-control mt-6">
+
+                            <SocialLogin></SocialLogin>
                         </div>
                         <Helmet>
                             <title>Bistro Boss | Login</title>
