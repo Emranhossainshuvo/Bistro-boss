@@ -27,20 +27,18 @@ const AllUsers = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 axiosSecure.delete(`/users/${user._id}`)
+                .then(res => {
+                    console.log(res.data)
+                    if (res.data.deletedCount) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                        });
+                    }
+                })
                 refetch()
-                    .then(res => {
-                        if (res.data.deletedCount > 0) {
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: "Your file has been deleted.",
-                                icon: "success"
-                            });
-                        }
-                    })
-
-                    .catch(err => {
-                        console.log(err)
-                    })
+                    
             }
         });
     }
