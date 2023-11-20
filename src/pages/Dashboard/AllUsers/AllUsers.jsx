@@ -48,6 +48,7 @@ const AllUsers = () => {
             .then(res => {
                 console.log(res.data);
                 if (res.data.modifiedCount) {
+                    refetch(); 
                     Swal.fire({
                         title: `${user.name} is an admin now!`,
                         showClass: {
@@ -94,7 +95,7 @@ const AllUsers = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>
-                                    {
+                                    { user.role === 'admin' ? 'Admin' :
                                         <button onClick={() => handleMakeAdmin(user)} className="btn bg-orange-500 text-white text-2xl btn-outline">
                                             <FaUsers />
                                         </button>
