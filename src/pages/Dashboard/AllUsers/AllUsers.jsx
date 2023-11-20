@@ -26,19 +26,21 @@ const AllUsers = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-
                 axiosSecure.delete(`/users/${user._id}`)
+                refetch()
                     .then(res => {
-                        if (res.data.deletedCount) {
+                        if (res.data.deletedCount > 0) {
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Your file has been deleted.",
                                 icon: "success"
                             });
                         }
-                        refetch()
                     })
 
+                    .catch(err => {
+                        console.log(err)
+                    })
             }
         });
     }
@@ -48,7 +50,7 @@ const AllUsers = () => {
             .then(res => {
                 console.log(res.data);
                 if (res.data.modifiedCount) {
-                    refetch(); 
+                    refetch();
                     Swal.fire({
                         title: `${user.name} is an admin now!`,
                         showClass: {
@@ -95,7 +97,7 @@ const AllUsers = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>
-                                    { user.role === 'admin' ? 'Admin' :
+                                    {user.role === 'admin' ? 'Admin' :
                                         <button onClick={() => handleMakeAdmin(user)} className="btn bg-orange-500 text-white text-2xl btn-outline">
                                             <FaUsers />
                                         </button>
