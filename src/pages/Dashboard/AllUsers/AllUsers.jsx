@@ -38,7 +38,7 @@ const AllUsers = () => {
                     }
                 })
                 refetch()
-                    
+                     
             }
         });
     }
