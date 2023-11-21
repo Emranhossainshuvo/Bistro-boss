@@ -4,9 +4,29 @@ const axiosSecure = axios.create({
 }); 
 
 const useAxiosSecure = () => {
+
+    // interceptor to add authorization header
+
     axiosSecure.interceptors.request.use(function(config){
+        const token = localStorage.getItem('access-token')
+        console.log('request stoped by the interceptors', token); 
+        config.headers.authorization = `Bearer ${token}`; 
         return config; 
+    }, function (error) {
+        return Promise.reject(error)
+    }
+    )
+
+    // interceptor 403 and 401 status
+    axiosSecure.interceptors.response.use(function(response){
+        return response; 
+    }, function(error){
+        const status = error.response.status; 
+        console.log('status error in the interceptor', status)
+        return Promise.reject(error); 
     })
+
+
     return axiosSecure; 
 };
 
