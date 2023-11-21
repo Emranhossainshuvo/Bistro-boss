@@ -38,7 +38,7 @@ const AuthProvider = ({ children }) => {
         return () => {
             return unSubscribe(); 
         }
-    }, [])
+    }, [axiosPublic])
 
     // google sign in 
     const googleSignIn = () => {

@@ -2,13 +2,14 @@ import { NavLink, Outlet } from "react-router-dom";
 import { MdApartment,  MdCalendarToday, MdCall, MdHome, MdList, MdMenu, MdPeople, MdReviews, MdShoppingCart, MdWallet } from "react-icons/md";
 import { ImBook, ImList, ImSpoonKnife } from "react-icons/im";
 import useCart from "../hooks/useCart";
+import useAdmin from "../hooks/useAdmin";
 
 
 const Dashboard = () => {
 
     const [cart] = useCart();
 
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
 
     return (
         <div className="flex">
