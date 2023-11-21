@@ -4,6 +4,9 @@ const axiosSecure = axios.create({
 }); 
 
 const useAxiosSecure = () => {
+    axiosSecure.interceptors.request.use(function(config){
+        return config; 
+    })
     return axiosSecure; 
 };
 
