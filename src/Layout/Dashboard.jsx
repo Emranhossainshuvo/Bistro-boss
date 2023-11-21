@@ -11,6 +11,8 @@ const Dashboard = () => {
 
     const [isAdmin] = useAdmin();
 
+    // console.log(isAdmin)
+
     return (
         <div className="flex">
             <div className="w-64 min-h-screen bg-orange-400">
