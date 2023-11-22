@@ -8,7 +8,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ManageItems = () => {
 
-    const [menu] = useMenu();
+    const [menu, , refetch] = useMenu();
     const axiosSecure = useAxiosSecure(); 
 
     const handleDeleteItem = (item) => {
@@ -23,13 +23,17 @@ const ManageItems = () => {
         }).then( async(result) => {
             if (result.isConfirmed) {
                 const res = await axiosSecure.delete(`/menu/${item._id}`);
-                console.log(res.data)
-                // Swal.fire({
-                //     title: "Deleted!",
-                //     text: "Your file has been deleted.",
-                //     icon: "success"
-                // });
-                // console.log(item)
+                // console.log(res.data)
+                if(res.data.deletedCount){
+                    refetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Item has been delete",
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
+                }
             }
         });
     }
