@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import SectionTitles from "../../../components/SectionTitles/SectionTitles";
 import { FaUtensils } from "react-icons/fa6";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY; 
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
@@ -10,6 +11,7 @@ const AddItems = () => {
     const { register, handleSubmit } = useForm();
 
     const axiosPublic = useAxiosPublic(); 
+    const axiosSecure = useAxiosSecure(); 
 
     const onSubmit = async(data) => {
         console.log(data); 
@@ -19,6 +21,22 @@ const AddItems = () => {
                 'content-type': 'multipart/form-data'
             }
         } ); 
+        if(res.data.success){
+            const menuItem = {
+                name: data.name, 
+                category: data.category, 
+                price: parseFloat(data.price), 
+                recipe: data.recipe, 
+                image: res.data.data.display_url
+            }
+            const menuRes = await axiosSecure.post('/menu', menuItem); 
+            console.log(menuRes.data); 
+            if(menuRes.data.insertedId){
+                // show an alert to let the user know that his mission was successfull
+                alert('successfully added'); 
+            }
+
+        }
         console.log(res.data)
     };
 
