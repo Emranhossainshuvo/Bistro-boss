@@ -4,12 +4,13 @@ import useMenu from "../../../hooks/useMenu";
 import { FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 
 const ManageItems = () => {
 
     const [menu, , refetch] = useMenu();
-    const axiosSecure = useAxiosSecure(); 
+    const axiosSecure = useAxiosSecure();
 
     const handleDeleteItem = (item) => {
         Swal.fire({
@@ -20,11 +21,11 @@ const ManageItems = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-        }).then( async(result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
                 const res = await axiosSecure.delete(`/menu/${item._id}`);
                 // console.log(res.data)
-                if(res.data.deletedCount){
+                if (res.data.deletedCount) {
                     refetch();
                     Swal.fire({
                         position: "top-end",
@@ -32,7 +33,7 @@ const ManageItems = () => {
                         title: "Item has been delete",
                         showConfirmButton: false,
                         timer: 1500
-                      });
+                    });
                 }
             }
         });
@@ -40,7 +41,7 @@ const ManageItems = () => {
 
     return (
         <div>
-            <SectionTitles subHeading="---Hurry up---" heading="Manage all items"></SectionTitles>
+            <SectionTitles subHeading="Hurry up" heading="Manage all items"></SectionTitles>
             <div>
                 <div className="overflow-x-auto">
                     <table className="table w-full">
@@ -75,9 +76,11 @@ const ManageItems = () => {
                                     </td>
                                     <td>{item.price}</td>
                                     <td>
-                                        <button className="btn hover:cursor-help btn-outline">
-                                            <FaEdit></FaEdit>
-                                        </button>
+                                        <Link to={`/dashboard/updateItem/${item._id}`}>
+                                            <button className="btn hover:cursor-help btn-outline">
+                                                <FaEdit></FaEdit>
+                                            </button> 
+                                        </Link>
                                     </td>
                                     <td>
                                         <button onClick={() => handleDeleteItem(item)} className="btn btn-outline">
