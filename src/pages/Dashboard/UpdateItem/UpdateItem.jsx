@@ -33,9 +33,9 @@ const UpdateItem = () => {
             }
             const menuRes = await axiosSecure.patch(`/menu/${_id}`, menuItem);
             console.log(menuRes.data);
-            if (menuRes.data.insertedId) {
+            if (menuRes.data.modifiedCount) {
                 // show an alert to let the user know that his mission was successfull
-                alert('successfully added');
+                alert('successfully updated');
             }
 
         }
