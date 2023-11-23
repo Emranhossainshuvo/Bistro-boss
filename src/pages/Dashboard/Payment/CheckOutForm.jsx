@@ -99,6 +99,9 @@ const CheckOutForm = () => {
             </button> 
 
             <p className="text-red-600">{error}</p>
+            {
+                transactionId && <p>Your transaction id: <span className="text-green-600">{transactionId}</span></p>
+            }
         </form>
     );
 };
