@@ -16,7 +16,7 @@ const CheckOutForm = () => {
     const elements = useElements();
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
-    const [cart] = useCart();
+    const [cart, refetch] = useCart();
     const totalPrice = cart.reduce((total, item) => total + item.price, 0)
 
     useEffect(() => {
@@ -85,7 +85,8 @@ const CheckOutForm = () => {
                     status: 'pending'
                 }
                 const res = await axiosSecure.post('/payments', payment);
-                console.log('payment saved', res.data)
+                console.log('payment saved', res.data); 
+                refetch();
             }
         }
     }
