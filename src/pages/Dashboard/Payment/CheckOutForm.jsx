@@ -4,6 +4,7 @@ import { useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useCart from "../../../hooks/useCart";
 import useAuth from "../../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 
 const CheckOutForm = () => {
@@ -11,6 +12,7 @@ const CheckOutForm = () => {
     const [error, setError] = useState('');
     const [clientSecret, setClientSecret] = useState('');
     const [transactionId, setTransactionId] = useState('');
+    const navigate = useNavigate(); 
 
     const stripe = useStripe();
     const elements = useElements();
@@ -87,6 +89,9 @@ const CheckOutForm = () => {
                 const res = await axiosSecure.post('/payments', payment);
                 console.log('payment saved', res.data); 
                 refetch();
+                if(res.data?.paymentResult?.insertedId){
+                    navigate('/dashboard/paymentHistory')
+                }
             }
         }
     }
