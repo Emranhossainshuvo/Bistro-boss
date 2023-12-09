@@ -13,7 +13,7 @@ I have a restaurent called Bistro Boss. So, this is the website for the restaure
 
 ## Technologies that I use in this project. 
 
-[![My Skills](https://skillicons.dev/icons?i=js,kotlin,nodejs,figma&theme=light)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=js,html,mongodb,express,react,nodejs,figma&theme=light)](https://skillicons.dev)
 
 
 
