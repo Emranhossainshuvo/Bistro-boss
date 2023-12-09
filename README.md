@@ -12,7 +12,7 @@ I have a restaurent called Bistro Boss. So, this is the website for the restaure
 
 ## Technologies that I use in this project:
 
-[![My Skills](https://skillicons.dev/icons?i=js,html,mongodb,express,tailwind,firebase,react,nodejs)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=js,html,css,mongodb,express,tailwind,firebase,react,nodejs)](https://skillicons.dev)
 
 # Links
 
