@@ -14,6 +14,12 @@ I have a restaurent called Bistro Boss. So, this is the website for the restaure
 
 [![My Skills](https://skillicons.dev/icons?i=js,html,css,mongodb,express,tailwind,firebase,react,nodejs)](https://skillicons.dev)
 
+
+## Contact Information
+- Email: emran.shuvo.dev@gmail.com
+- X: https://twitter.com/Shuvo0031770590
+- Linkedin: https://www.linkedin.com/in/md-emran-hossain-shuvo-0711802a4/  
+
 # Links
 
 - Live site link: https://bistro-boss-1c45d.web.app/
