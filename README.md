@@ -11,4 +11,4 @@ I have a restaurent called Bistro Boss. So, this is the website for the restaure
 
 ## key feature of the project.
 
--This website has authentication system : email-password, google and github.
+- This website has authentication system : email-password, google and github.
