@@ -29,11 +29,11 @@ const Order = () => {
             {/* tab from react tab */}
             <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
                 <TabList>
-                    <Tab>Salad</Tab>
-                    <Tab>Pizza</Tab>
-                    <Tab>Soup</Tab>
-                    <Tab>Drinks</Tab>
-                    <Tab>Dessert</Tab>
+                    <Tab>Travel bag</Tab>
+                    <Tab>Laptop bag</Tab>
+                    <Tab>School bag</Tab>
+                    <Tab>Sports bag</Tab>
+                    <Tab>Everyday bag</Tab>
                 </TabList>
                 <TabPanel>
                     <OrderTab
